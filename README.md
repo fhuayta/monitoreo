@@ -4,9 +4,9 @@ Repositorio con archivos instaladores y guias para la instalación de herramient
 ## Documentos a cubrir
 
 * Grafana [Ver instalador](./md/Grafana.md)
-* Prometheus
+* Prometheus [Ver instalador](./md/Prometheus.md)
 * AlertManager
-* NodeExporter
+* NodeExporter [Ver instalador](./md/NodeExporter.md)
 * PostgresExporter
 * Loki
 * Promtail
