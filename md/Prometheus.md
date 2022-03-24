@@ -115,6 +115,12 @@ sudo systemctl enable prometheus
 
 ```
 
+Si esta funcionando:
+```shell
+sudo service prometheus status
+
+```
+
 -----------------------
 
 
