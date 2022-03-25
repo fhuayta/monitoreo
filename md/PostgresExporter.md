@@ -65,6 +65,16 @@ Crear y editar el archivo:
 sudo nano /etc/systemd/system/postgres_exporter.service
 
 ```
+Crear directorio /data
+
+```shell
+sudo mkdir /data
+
+sudo mkdir /data/postgresexporter
+```
+
+
+
 Ingresar el siguiente contenido dentro del archivo
 
 ```
