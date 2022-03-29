@@ -29,7 +29,7 @@ Descomprimir
 ```
 unzip loki-linux-amd64.zip
 ```
-Mover a /user/local/bin
+Mover a /user/local/bin  renombrando el archivo a Loki.
 
 ```
 sudo mv loki-linux-amd64 /usr/local/bin/loki
@@ -45,7 +45,7 @@ sudo mkdir -p /data/loki
 ```
 Editar archivo de configuración:
 ```
-sudo nano /etc/loki-local-config.yaml
+sudo nano /etc/loki/loki-local-config.yaml
 ```
 Contenido de archivo de configuración
 
@@ -91,8 +91,8 @@ limits_config:
 
 chunk_store_config:
   max_look_back_period: 2688h
-  
-## Periodo de retencion 3.5 ~ 
+
+## Periodo de retencion 3.5 ~
 table_manager:
   retention_deletes_enabled: true
   retention_period: 2688h
@@ -100,8 +100,7 @@ table_manager:
 ## Crear Servicio LOKI
 
 
-
-Dentro de la dirección: /etc/systemd/system
+Crear el archivo **loki.service** dentro de la dirección: /etc/systemd/system
 
 ```
 sudo nano /etc/systemd/system/loki.service
@@ -116,7 +115,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/loki -config.file /etc/loki-local-config.yaml
+ExecStart=/usr/local/bin/loki -config.file /etc/loki/loki-local-config.yaml
 Restart=on-failure
 RestartSec=10s
 

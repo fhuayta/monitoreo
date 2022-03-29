@@ -33,11 +33,11 @@ promtail, version 2.0.0 (branch: HEAD, revision: 6978ee5d)
 
 ## Configuración
 
-Crear el archivo de configuración YAML en el siguiente directorio: /usr/local/bin
+Crear el archivo de configuración YAML en el siguiente directorio: /etc/promtail
 
 ```
-sudo mkdir /var/log/promtail
-sudo nano /etc/promtail-local-config.yaml
+sudo mkdir /etc/promtail
+sudo nano /etc/promtail/promtail-local-config.yaml
 ```
 Agregar el siguiente contenido al archivo, configurando según sus requerimientos
 ```
@@ -73,7 +73,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/promtail -config.file /etc/promtail-local-config.yaml
+ExecStart=/usr/local/bin/promtail -config.file /etc/promtail/promtail-local-config.yaml
 
 [Install]
 WantedBy=multi-user.target
@@ -98,7 +98,7 @@ $ systemctl status promtail.service
       Tasks: 6 (limit: 1137)
      Memory: 8.8M
      CGroup: /system.slice/promtail.service
-             └─15381 /usr/local/bin/promtail -config.file /etc/promtail-local-config.yaml
+             └─15381 /usr/local/bin/promtail -config.file /etc/promtail/promtail-local-config.yaml
 
 Dec 21 11:57:41 ubuntu systemd[1]: Started Promtail service.
 Dec 21 11:57:41 ubuntu promtail[15381]: level=info ts=2020-12-21T11:57:41.911186079Z caller=server.go:225 http=[::]:9080 grpc=[::]:35499 msg="server listening on>
