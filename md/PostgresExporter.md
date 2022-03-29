@@ -27,7 +27,7 @@ cd postgres_exporter-0.10.1.linux-amd64
 
 Mover ejecutable:
 ```
-sudo mv postgres_exporter_v0.10.1_linux-amd64 /usr/local/bin/postgres_exporter
+sudo mv postgres_exporter /usr/local/bin/postgres_exporter
 ```
 ## Configuración Postgres Exporter
 
@@ -65,6 +65,16 @@ Crear y editar el archivo:
 sudo nano /etc/systemd/system/postgres_exporter.service
 
 ```
+Crear directorio /data
+
+```shell
+sudo mkdir /data
+
+sudo mkdir /data/postgresexporter
+```
+
+
+
 Ingresar el siguiente contenido dentro del archivo
 
 ```
