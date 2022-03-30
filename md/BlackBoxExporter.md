@@ -12,14 +12,23 @@ Descomprimir el archivo e ingresar a la carpetaa
 ```shell
 sudo tar -xvf blackbox_exporter-0.19.0.linux-amd64.tar.gz
 
-sudo cp -R  blackbox_exporter-0.19.0.linux-amd64 /opt/blackbox
+cd blackbox_exporter-0.19.0.linux-amd64
+
+sudo mv blackbox_exporter /usr/local/bin/blackbox
 ```
 
-Crear e ingresar a la capeta /opt/blackbox/blackbox.yml
+Crear e ingresar a la capeta /etc/blackbox/
+```shell
+sudo mkdir /etc/blackbox
+```
+
 
 ```shell
+# mover el archivo a carpeta creada
+sudo mv blackbox.yml /etc/blackbox/
 
-sudo nano /opt/blackbox/blackbox.yml
+# editar el archivo
+sudo nano /etc/blackbox/blackbox.yml
 ```
 
 ```
@@ -28,7 +37,7 @@ sudo nano /opt/blackbox/blackbox.yml
 ### Archivo de configuracion *blackbox.yml*
 Editar el archivo *blackbox.yml*
 ```shell
-sudo nano /opt/blackbox/blackbox.yml
+sudo nano /etc/blackbox/blackbox.yml
 ```
 
 Contenido:
@@ -135,11 +144,12 @@ After=network-online.target
 Type=simple
 User=root
 Group=root
-ExecStart=/opt/blackbox/blackbox_exporter \
-  --config.file=/opt/blackbox/blackbox.yml \
+ExecStart=/usr/local/bin/blackbox \
+  --config.file=/etc/blackbox/blackbox.yml \
   --web.listen-address=":9115"
 
 Restart=always
+
 
 [Install]
 WantedBy=multi-user.target
@@ -151,5 +161,8 @@ Luego de crear el servicio
 sudo systemctl daemon-reload
 sudo systemctl start blackbox
 sudo systemctl enable blackbox
+
+sudo systemctl status blackbox
+
 
 ```
