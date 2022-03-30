@@ -3,13 +3,13 @@
 Instalación desde archivo binario
 
 
-Descargar con el siguiente compando
+Descargar con el siguiente comando
 ```
 wget https://github.com/prometheus/alertmanager/releases/download/v0.23.0/alertmanager-0.23.0.linux-amd64.tar.gz
 ```
 Descomprimir
 ```
-sudo tar -xvf  alertmanager-0.22.2.linux-amd64.tar.gz
+sudo tar -xvf  alertmanager-0.23.0.linux-amd64.tar.gz
 ```
 
 Ingresar a la carpeta
