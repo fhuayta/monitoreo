@@ -3,7 +3,7 @@
 Instalación desde archivo binario
 
 
-Descargar con el siguiente comando
+Descargar con el siguiente compando
 ```
 wget https://github.com/prometheus/alertmanager/releases/download/v0.23.0/alertmanager-0.23.0.linux-amd64.tar.gz
 ```
@@ -14,7 +14,7 @@ sudo tar -xvf  alertmanager-0.23.0.linux-amd64.tar.gz
 
 Ingresar a la carpeta
 ```
-cd alertmanager-0.22.2.linux-amd64
+cd alertmanager-0.23.0.linux-amd64
 ```
 
 Copiar los archivos a las direcciones correspondientes
@@ -32,12 +32,13 @@ sudo mkdir /etc/alertmanager
 sudo mv alertmanager.yml /etc/alertmanager/alertmanager.yml
 ```
 
-
 ## Creando Servicio para AlertManager
 
-
 ```
-sudo tee /etc/systemd/system/alertmanager.service<<EOF
+sudo nano /etc/systemd/system/alertmanager.service
+```
+Copiar el siguiente contenido:
+```
 
 [Unit]
 Description=Alertmanager service
@@ -51,8 +52,6 @@ ExecStart=/usr/local/bin/alertmanager --web.listen-address=0.0.0.0:9091 --config
 
 [Install]
 WantedBy=multi-user.target
-
-EOF
 ```
 Implementar e iniciar servicio
 ```

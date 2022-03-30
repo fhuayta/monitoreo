@@ -17,10 +17,6 @@ sudo apt-get install -y adduser libfontconfig1
 ```
 Obtener la versión OSS de Grafana (en https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1 es posible revisar las versiones disponibles)
 ```
-wget https://dl.grafana.com/oss/release/grafana_8.0.0_amd64.deb
-ó 
-wget https://dl.grafana.com/oss/release/grafana_8.1.1_amd64.deb
-ó
 wget https://dl.grafana.com/oss/release/grafana_8.3.4_amd64.deb
 
 ```

@@ -17,7 +17,7 @@ cd blackbox_exporter-0.19.0.linux-amd64
 sudo mv blackbox_exporter /usr/local/bin/blackbox
 ```
 
-Crear e ingresar a la capeta /etc/blackbox/
+Crear la capeta /etc/blackbox/
 ```shell
 sudo mkdir /etc/blackbox
 ```
@@ -90,39 +90,6 @@ modules:
   icmp:
     prober: icmp
 ```
-## Configurar Blackbox con Prometheus
-
-Dentro del archivo *prometheus.yml* se debe agregar los siguientes jobs, editar el archivo en cuestion (Dentro del servidor Prometheus).
-
-```
-sudo nano /etc/prometheus/prometheus.yml
-```
-
-dentro de este archivo, al final, se debe agregar las siguientes configuraciones. En ***- targets*** se debe poner las URL a monitorear y en ***- target_label: __address__*** colocar la IP y puerto del Blackbox.
-
-```
-  - job_name: 'prometheus-blackbox'
-    static_configs:
-    - targets: ['localhost:9090', '192.168.22.16:9115']
-
-  - job_name: 'blackbox-sitio'
-    metrics_path: /probe
-    params:
-      module: [http_prometheus]
-    static_configs:
-      - targets:
-        - https://<<SITIO-WEB>>.gob.bo    # Target to probe with https.
-        - https://www.<<SITIO-WEB>>.bo
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: 192.168.22.XX:9115  # The blackbox exporter's real hostname:port.
-
-```
-
 ## Crear servicio
 
 Para crear el servicio de **Blackbox** realizar:
@@ -163,6 +130,36 @@ sudo systemctl start blackbox
 sudo systemctl enable blackbox
 
 sudo systemctl status blackbox
+```
+## Configurar Blackbox con Prometheus
 
+Dentro del archivo *prometheus.yml* se debe agregar los siguientes jobs, editar el archivo en cuestion (Dentro del servidor Prometheus).
+
+```
+sudo nano /etc/prometheus/prometheus.yml
+```
+
+dentro de este archivo, al final, se debe agregar las siguientes configuraciones. En ***- targets*** se debe poner las URL a monitorear y en ***- target_label: __address__*** colocar la IP y puerto del Blackbox.
+
+```
+  - job_name: 'prometheus-blackbox'
+    static_configs:
+    - targets: ['localhost:9090', '192.168.22.16:9115']
+
+  - job_name: 'blackbox-sitio'
+    metrics_path: /probe
+    params:
+      module: [http_prometheus]
+    static_configs:
+      - targets:
+        - https://<<SITIO-WEB>>.gob.bo    # Target to probe with https.
+        - https://www.<<SITIO-WEB>>.bo
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 192.168.22.XX:9115  # The blackbox exporter's real hostname:port.
 
 ```
