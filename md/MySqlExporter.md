@@ -8,11 +8,11 @@ $ wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/m
 ```
 Descomprimir archivos
 ```
-$ tar xvfz mysqld_exporter-*.*-amd64.tar.gz
-$ cd mysqld_exporter-*.*-amd64
+$ tar xvfz mysqld_exporter-0.12.1.linux-amd64.tar.gz
+$ cd mysqld_exporter-0.12.1.linux-amd64
 ```
 
-### Crear usuario Mysql
+### Crear usuario Mysql - Hacerlo en la consola MYSQL
 
 Ejecutar las siguientes sentencias en Mysql
 
