@@ -18,3 +18,13 @@ alerting:
 ```
 sudo systemctl restart prometheus
 ```
+
+Para agregar las reglas de notificaciones, agregar:
+```
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+
+rule_files:
+   - rule.yml
+
+```
+
