@@ -22,9 +22,13 @@ wget https://dl.grafana.com/oss/release/grafana_8.3.4_amd64.deb
 ```
 Instalar grafana
 ```
-sudo dpkg -i grafana_8.x.x_amd64.deb
-```
+sudo dpkg -i grafana_8.3.4_amd64.deb
 
+```
+Ver el estado del servicio grafana:
+```
+sudo service grafana-server status
+```
 ### Iniciar/Reiniciar Servicio
 Para iniciar servicio, ejecutar:
 ```

@@ -1,0 +1,61 @@
+groups:
+  - name: Host metricas
+    rules:
+      - alert: Alerta SINPLU - SERVIDORES - Host Caidos
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: warning
+          type: host_default
+        annotations:
+          valor: '{{ $value | humanize }}'
+          summary: >
+            RESPUESTA DE EQUIPOS -> El Host {{ $labels.instance }} esta en estado caido (down). Favor revisar estado de los servidores.
+          description: >
+            RESPUESTA DE EQUIPOS -> El Host {{ $labels.instance }} del {{ $labels.job }} esta en estado caido (down), por mas de 30 segundos.
+
+  - name: Host cpu
+    rules:
+      - alert: Alerta SINPLU - SERVIDORES - Alto uso de CPU
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 80
+        for: 1m
+        labels:
+          severity: warning
+          type: host_default
+        annotations:
+          valor: '{{ $value | humanize }}'
+          summary: >
+            Consumo Alto de CPU (instance {{ $labels.instance }}) - (job {{ $labels.job }}) por mas de 1 minuto.
+          description: >
+            El Consumo CPU es > 80%,  VALUE = {{ $value }}  LABELS = {{ $labels }}
+
+  - name: Consumo de memoria RAM
+    rules:
+      - alert: Alerta SINPLU - SERVIDORES - Alto Consumo de Memoria RAM
+        expr: 100 -  sum by(instance) (( node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100)  > 75
+        for: 1m
+        labels:
+          severity: warning
+          type: host_default
+        annotations:
+          valor: '{{ $value | humanize }}'
+          summary: >
+            Alto consumo de Memoria RAM en: ( instance {{ $labels.instance }}) por mas de 1 minuto
+          description: >
+            Memoria RAM > 75%,  VALOR = {{ $value }},  LABELS = {{ $labels.instance }}
+
+  - name: Uso de disco PCs
+    rules:
+      - alert: Alerta SINPLU - SERVIDORES - Poco espacio disponible en particiones
+        expr: (node_filesystem_avail_bytes{ mountpoint=~"/home|/var|/swap|/" } / node_filesystem_size_bytes{ mountpoint=~"/home|/var|/swap|/" }) * 100 < 15
+        for: 1m
+        labels:
+          severity: warning
+          type: host_default
+        annotations:
+          valor: '{{ $value | humanize }}'
+          summary: >
+            Poco espacio en disco
+          description: >
+            Particiones del host "{{ $labels.instance }}" tiene poco espacio disponible en almacenamiento: {{ $value | humanize }}%,
+            por mas de 1 minuto, favor verificar el estado de los mismos.

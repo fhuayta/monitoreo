@@ -1,0 +1,54 @@
+# Configuracion de herramienta alertmanager, direccion de archivo en servidor: /etc/alertmanager/alertmanager.yml
+global:
+  resolve_timeout: 5m
+
+#templates:
+# - /etc/alertmanager/template/*.tmpl
+
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: 'email'
+
+  routes:
+  - match:
+      severity: warning
+    continue: true
+    receiver: 'email'
+  - match:
+      severity: critical
+    continue: true
+    receiver: 'emailcritico'
+
+receivers:
+
+- name: 'email'
+  email_configs:
+  - to: 'fhuayta@agetic.gob.bo'
+    from: 'monitoreosinplu@dirnoplu.gob.bo'
+    smarthost: 'smtp.dirnoplu.gob.bo:587'
+    auth_username: 'monitoreosinplu@dirnoplu.gob.bo'
+    auth_identity: 'monitoreosinplu@dirnoplu.gob.bo'
+    auth_password: 'INGRESAR-PASSWORD-AQUI'
+    tls_config:
+      insecure_skip_verify: true
+
+- name: 'emailcritico'
+  email_configs:
+  - to: 'fhuayta@yopmail.com'
+    from: 'monitoreosinplu@dirnoplu.gob.bo'
+    smarthost: 'smtp.dirnoplu.gob.bo:587'
+    auth_username: 'monitoreosinplu@dirnoplu.gob.bo'
+    auth_identity: 'monitoreosinplu@dirnoplu.gob.bo'
+    auth_password: 'INGRESAR-PASSWORD-AQUI'
+    tls_config:
+      insecure_skip_verify: true
+
+inhibit_rules:
+  - source_match:
+#      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
