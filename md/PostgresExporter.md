@@ -86,8 +86,7 @@ After=network-online.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/opt/mysqlq_exporter
-ExecStart=/usr/local/bin/mysqld_exporter
+WorkingDirectory=/data/mysqlq_exporter
 Restart=always
 RestartSec=2
 StartLimitInterval=0
@@ -98,6 +97,7 @@ ExecStart=/usr/local/bin/postgres_exporter
 
 [Install]
 WantedBy=multi-user.target
+
 
 ```
 Finalmente habilitar el servicio y ponerlo con auto inicio
