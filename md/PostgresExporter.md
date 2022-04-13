@@ -131,7 +131,7 @@ Lo cual retornará contenido http con la información de metricas de la BD para 
 
 ## Configurando [Prometheus](../md/Prometheus.md) con Postgres Exporter
 
-Editar el archivo "prometheus.yml" (Generalmente en /opt/prometheus/prometheus.yml) de configuración del software Prometheus. El archivo se encuentra en la ruta principal donde se instalo dicho software.
+Editar el archivo "prometheus.yml" (Generalmente en /etc/prometheus/prometheus.yml) de configuración del software Prometheus. El archivo se encuentra en la ruta principal donde se instalo dicho software.
 
 Agregar el siguiente contenido al final del archivo dentro de los -job_name
 ```
