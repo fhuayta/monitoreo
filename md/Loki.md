@@ -43,6 +43,12 @@ Crear la carpeta
 ```
 sudo mkdir -p /data/loki
 ```
+
+Crear la carpeta:
+```
+/etc/loki/
+```
+
 Editar archivo de configuración:
 ```
 sudo nano /etc/loki/loki-local-config.yaml
