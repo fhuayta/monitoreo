@@ -1,0 +1,48 @@
+groups:
+  - name: rate-alerting-ssh-vault
+    rules:
+      - alert: Alerta SINPLU - VAULT - SSH alta cantidad de logs
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="vault-auth-ssh"}[30s]))
+            > 100
+        for: 30s
+        labels:
+            severity: warning
+            team: seguridad
+            category: logs
+        annotations:
+            title: "Alta cantidad de logs detectado"
+            description: "El servidor de vault esta notificando alta cantidad de logs"
+
+  - name: alerta-ssh-ingreso-vault
+    rules:
+      - alert:  Alerta SINPLU - VAULT - SSH intento fallido de logueo con usuario/password o certificado incorrecto
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="vault-auth-ssh"}  |~ "Connection closed by authenticating user" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: seguridad
+            category: logs
+        annotations:
+            title: "Ingreso fallido de logueo con usuario/password o certificado incorrecto"
+            description: "Ingreso fallido por SSH"
+
+  - name: alerta-ssh-ingreso-correcto-vault
+    rules:
+      - alert: Alerta SINPLU - VAULT - SSH logueo exitoso
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="vault-auth-ssh"}  |~ "Accepted publickey for" [1m]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: seguridad
+            category: logs
+        annotations:
+            title: "Se notifica el ingreso correcto por SSH."
+            description: "Se notifica el ingreso correcto por SSH"

@@ -1,0 +1,220 @@
+# ERROR SEGIP
+  - name: sinplu backend segip iniciar
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error al iniciar segip
+        expr: |
+          sum by (job, host,  compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.iniciar" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP - Backend error - {{ $labels.host }}"
+            description: "SINPLU Error iniciar servicio de SEGIP - {{ $labels.host }} -"
+
+  - name: sinplu backend segip recuperacion
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error en recuperacion de datos
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.recuperacion" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP - Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en la recuperacion de datos del SEGIP - {{ $labels.host }}"
+
+  - name: sinplu backend segip contrastacion
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error en la contrastacion
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.contrastacion" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error servicio de contrastacion de SEGIP - {{ $labels.host }}"
+
+  - name: sinplu backend segip certificacion
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error en certificacion
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.certificacion" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en certificacion SEGIP - {{ $labels.host }}"
+
+  - name: sinplu backend segip usuarioFinalAlta
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error en usuarioFinalAlta
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.usuarioFinalAlta" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en usuarioFinalAlta SEGIP - {{ $labels.host }}"
+
+  - name: sinplu backend segip usuarioFinalHabilitaInhabilita
+    rules:
+      - alert: Alerta SINPLU - SEGIP - Backend error en usuarioFinalHabilitaInhabilita
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*segip.usuarioFinalHabilitaInhabilita" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "SEGIP -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en usuarioFinalHabilitaInhabilita SEGIP - {{ $labels.host }}"
+
+# ERROR CONTROLADO - SERVICIO DE VERIFICACION DE FIRMA
+
+  - name: sinplu backend firmadigital base64
+    rules:
+      - alert: Alerta SINPLU - FIRMADIGITAL - Backend error en firmadigital base64
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*firmadigitalService.obtenerFirmasBase64" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "FIRMADIGITAL -  Backend error en firma - {{ $labels.host }}"
+            description: "FIRMADIGITAL Error en firmadigitalService.obtenerFirmasBase64 - {{ $labels.host }}"
+
+# ERROR CONTROLADO - SERVICIO DE GENERACION DE PDFS
+
+  - name: sinplu backend pdfService generarReporte
+    rules:
+      - alert: Alerta SINPLU - REPORTEPDF - Backend error generar reporte
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*pdfService.generarReporte" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "REPORTEPDF - Backend error generar reporte en PDF - {{ $labels.host }}"
+            description: "REPORTEPDF Error en pdfService.generarReporte - {{ $labels.host }}"
+
+# ERROR CONTROLADO - RPA
+
+  - name: sinplu backend RPA
+    rules:
+      - alert: Alerta SINPLU - RPA- Backend error en RPA
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*rpaService" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "RPA -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en rpaService - {{ $labels.host }}"
+
+# ERROR CONTROLADO - FUNDEMPRESA
+
+  - name: sinplu backend FUNDEMPRESA
+    rules:
+      - alert: Alerta SINPLU - FUNDEMPRESA - Backend error en FUNDEMPRESA
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "error.*fundempresaService" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "FUNDEMPRESA -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en FUNDEMPRESA - {{ $labels.host }}"
+
+# ERROR CONTROLADO - VAULT
+
+  - name: sinplu backend VAULT
+    rules:
+      - alert: Alerta SINPLU  VAULT  vaultService
+        expr: |
+          sum by (job, host,  compose_service)
+            (rate({job="backend-app-error"}  |~ "vaultService.*" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "VAULT -  Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en vaultService - {{ $labels.host }}"
+
+  - name: sinplu backend VAULT agent
+    rules:
+      - alert: Alerta SINPLU VAULT agentVaultService
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "agentVaultService.*" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "VAULT - Backend error - {{ $labels.host }}"
+            description: "SINPLU Error en agentVaultService - {{ $labels.host }}"
+
+# ERROR INESPERADO
+
+  - name: sinplu backend error inesperado
+    rules:
+      - alert: Alerta SINPLU - BACKEND - UNEXPECTED
+        expr: |
+          sum by (job, host, compose_service)
+            (rate({job="backend-app-error"}  |~ "UNEXPECTED-ERROR 500" [30s]))
+            > 0
+        for: 30s
+        labels:
+            severity: warning
+            team: desarrollo
+            category: logs
+        annotations:
+            title: "ERROR INESPERADO - Backend error - {{ $labels.host }}"
+            description: "SINPLU Error con  UNEXPECTED-ERROR 500 - {{ $labels.host }}"
