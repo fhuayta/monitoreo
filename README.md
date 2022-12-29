@@ -13,4 +13,4 @@ Repositorio con archivos instaladores y guias para la instalación de herramient
 
 ## Ejemplos de implementación
 
-Ejemplos de configuración de herramientas
+Ejemplos de configuración de herramientas para carpeta de monitoreo
